@@ -79,4 +79,9 @@ body {
     background-color: transparent !important;
     color:white !important;
 }
-
+.modal-body{
+    color:black !important;
+}
+.modal-header{
+    color: black !important;
+}

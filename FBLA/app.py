@@ -377,21 +377,22 @@ def reviewProfiles():
     for user in user_applicants:
         #show all the non reviewed applicants to the admin
         portfolio.append({"id":user["id"],"name": user["name"], "email": user["email"], "role": user["Role"]})
-        print("Portfolio:",portfolio)
     if request.method == "POST":
         decision = request.form.get("action")
         if decision:
-            action, job_id = decision.split("_")
-            job_id = int(job_id)
+            action, user_id = decision.split("_")
+            user_id = int(user_id)
+        
             if action == "approve":
                 #if the user is approved, set their status to that
-                cursor.execute("UPDATE students SET status = ?", ("approved",))
-            if action == "decline":
+                cursor.execute("UPDATE students SET status = ? WHERE id = ?", ("approved", user_id))
+                conn.commit()  # Ensure the changes are committed
+            elif action == "decline":
                 #if they are declined, delete them from the table
-                cursor.execute("DELETE FROM students WHERE id = ?",(job_id,))
-        conn.commit()
+                cursor.execute("DELETE FROM students WHERE id = ?",(user_id,))
+                conn.commit()
         conn.close()
-        return redirect("/")
+        return redirect("/reviewprofiles")
     conn.close()
     return render_template("aprofiles.html", portfolio = portfolio)
 
