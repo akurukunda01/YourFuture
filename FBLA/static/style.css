@@ -1,0 +1,82 @@
+body { 
+    background-image: url('./city.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    
+    color:white;
+    height: 100vh;
+    
+    
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.brand {
+    width: 50px; 
+    height: auto; 
+}
+.navbar-nav .nav-link {
+    font-size: 20px; 
+    padding-left: 100px; 
+    padding-right: 100px; 
+}
+
+
+.navbar-nav {
+    margin-left: 50px; 
+    margin-right: 50px; 
+}
+
+
+.navbar-brand {
+    margin-right: 30px; 
+    
+}
+
+.navbar {
+    margin-bottom: 2rem;
+    
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+
+}
+.card-transparent{
+    color: white !important;
+    background-color: transparent !important;
+    font-size: xx-large;
+    margin-top: 50px;
+    padding: 100px;
+}
+.custom-welcome {
+    text-align: center !important;
+    margin-top: auto;
+  }
+.future{
+    text-align: center;
+    max-width: fit-content;
+    margin: auto;
+    margin-bottom: 50px;
+    color:white !important;
+}
+.logo{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    filter: invert(1);
+}
+.images{
+    filter: invert(1);
+    margin-bottom: 100px;
+}
+
+.card-source{
+    background-color: transparent !important;
+    color:white !important;
+}
+

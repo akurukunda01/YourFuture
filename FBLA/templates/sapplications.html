@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Pinned Jobs
+{% endblock %}
+
+{% block main %}
+<div class = "custom-welcome">
+    <h2>These are your current applications:</h2>
+<div>
+    {% for job in portfolio %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">{{ job.company }}</h2>
+                    </div>
+                    <form action="/reviewJobs" method="post">
+                        <div class="job">
+                            <p>Role: {{ job.role }}</p>
+                            <p>Application: {{ job.reason }}</p>
+
+                        </div>
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobModal{{ job.id }}">
+                                View Resume
+                            </button>
+                            <button type="submit" class="btn btn-danger" name="action" value="remove_{{ job.id }}">Remove</button>
+        
+                            <div class="modal fade" id="addJobModal{{ job.id }}" tabindex="-1" aria-labelledby="addJobModalLabel{{ job.id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addJobModalLabel{{ job.id }}">Application</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <iframe src="{{ url_for('uploaded_file', filename=job.resume) }}" alt="{{ job.resume }}" width="100%" height="400px" style="border: none;"></iframe>
+                                            </div>
+                                            <p>This is your uploaded resume</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    
+</form>
+
+
+{% endblock %}

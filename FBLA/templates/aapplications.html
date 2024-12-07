@@ -1,0 +1,66 @@
+{% extends "admin.html" %}
+
+{% block title %}
+    Review applications
+{% endblock %}
+
+{% block main %}
+<div class = "app-welcome">
+  <h2>These are applications from students:<h2>
+  </div>
+{% for job in portfolio %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-center">{{ job.name }}</h2>
+      </div>
+
+      <form action="/reviewapplicants" method="post">
+        <div class="card-body">
+          <p>Name: {{ job.name }}</p>
+          <p>Email: {{ job.email }}</p>
+          <p>Company: {{ job.company }}</p>
+          <p>Role: {{ job.role }}</p>
+          <p>Application: {{ job.reason }}</p>
+
+          
+          <div class="d-grid gap-2 d-md-block">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobModal{{ job.id }}">
+              View Resume
+            </button>
+          </div>
+
+          
+          <div class="modal fade" id="addJobModal{{ job.id }}" tabindex="-1" aria-labelledby="addJobModalLabel{{ job.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addJobModalLabel{{ job.id }}">Application</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <iframe src="{{ url_for('uploaded_file', filename=job.resume) }}" alt="{{ job.resume }}" width="100%" height="400px" style="border: none;"></iframe>
+                  <p>This is the applicant's uploaded resume</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <button type="submit" name="action" class="btn btn-danger" value="remove_{{ job.id }}">Remove</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+    
+
+
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "admin.html" %}
+
+{% block title %}
+    Admin Home
+{% endblock %}
+
+{% block main %}
+<div class = "custom-welcome">
+    <h1>Welcome to YourFuture {{ name }}!</h1>
+<div>
+<div class = "logo">
+    <img src = "../static/logo.png" alt = "YourFuture">
+</div>
+<div class = "future">
+    <h3> 
+        Welcome to YourFuture! As an administrator, you play a crucial role in ensuring our platform runs smoothly
+         and effectively connects employers with talented students. YourFuture offers you the tools to manage job postings, review applicant submissions, and facilitate seamless communication between employers and students. With your oversight, we can maintain a user-friendly experience that helps shape the professional journeys of students while meeting the needs of employers.
+         Together, we can foster a thriving community where opportunity and growth go hand in hand. Thank you for helping us build a brighter future!
+    </h3>
+</div>
+<div class = "card card-transparent">
+    <div class = "card-header">
+        <h2>Connection<h2>
+    </div>
+    <div class = "card-body">
+        We connect students to employers and more importantly to their future.
+    </div>
+</div>
+<div class = "images">
+    <img src = "..\static\handshake-removebg-preview.png" alt = "connection">
+</div>
+<div class = "card card-transparent">
+    <div class = "card-header">
+        <h2>Opportunity<h2>
+    </div>
+    <div class = "card-body">
+        We give student the opportunites they need to grow and evolve.
+    </div>
+</div>
+<div class = "images">
+    <img src = "..\static\growth-removebg-preview.png" alt = "oppurtunity">
+</div>
+<div class = "card card-transparent">
+    <div class = "card-header">
+        <h2>Learning<h2>
+    </div>
+    <div class = "card-body">
+        We provide invaluable knowledge to students about what their future can be, teaching them life skills to conquer their goals.
+    </div>
+</div>
+<div class = "images">
+    <img src = "..\static\book-removebg-preview.png" alt = "learning">
+</div>
+
+
+        
+
+<div class = "credits">
+    <a href="/credits">Credits</a>
+    </a>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'employer.html' %}
+
+{% block title %}
+  Add Job
+{% endblock %}
+
+{% block main %}
+{% for job in portfolio %}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">{{ job.company }}</h2>
+        </div>
+        <div class="card-body">
+          <div class="job">
+            <p>Role: {{ job.company_role }}</p>
+            <p>Description: {{ job.Description }}</p>
+            <p>Pay: {{ job.pay }}</p>
+          </div>
+          <form method="POST">
+            <button type="submit" class="btn btn-danger" id="remove" name="remove" value="decline_{{ job.id }}">Remove</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobModal">Add Job</button>
+
+<div class="modal fade" id="addJobModal" tabindex="-1" aria-labelledby="addJobModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addJobModalLabel">Add New Job</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" autocomplete="off">
+          <div class="mb-3">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" id="company" name="company" required />
+          </div>
+          <div class="mb-3">
+            <label for="company_role" class="form-label">Role</label>
+            <input type="text" class="form-control" id="company_role" name="company_role" required />
+          </div>
+          <div class="mb-3">
+            <label for="pay" class="form-label">Pay</label>
+            <input type="text" class="form-control" id="pay" name="pay" required />
+          </div>
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="Description" name="Description" required />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="add">Save Job</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "admin.html" %}
+
+{% block title %}
+    Review Profile
+{% endblock %}
+
+{% block main %}
+    {% for user in portfolio %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">{{ user.name }}</h2>
+                </div>
+                <form action="/reviewprofiles" method="post">
+                    <div class="profile">
+                        <p> Role: {{ user.role }}</p>
+                        <p> Email: {{ user.email }}</p>
+                    </div>
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="button" class="btn btn-primary" value = "approve_{{ user.id }}">Approve</button>
+                        <button type="button" class="btn btn-danger" value = "decline_{{ user.id }}">Decline</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+{% endblock %}
