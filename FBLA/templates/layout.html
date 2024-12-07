@@ -44,6 +44,9 @@
               </div>
             </div>
           </nav>
+        {% elif not (request.path == "/login" or request.path == "/register") %}
+          <h2>Please Login to access this page</h2>
+          <a href = "/login">Go to Login Page</a>
         
         
         {% endif %}

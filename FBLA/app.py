@@ -2,7 +2,7 @@ import sqlite3
 import  os
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from flask import Flask, flash, redirect, render_template, request, session,g, send_from_directory
+from flask import Flask, redirect, render_template, request, session,g, send_from_directory
 from flask_session import Session
 from helpers import login_required,apology
 
@@ -70,7 +70,7 @@ def register():
 
         if password!=confirmation:
             #user's password and confirmed password input in the form do not match up
-            flash("Enter the correct password")
+            return apology("Enter the correct password")
         
         #check if there is an account already registered to that email
         cursor.execute("SELECT email FROM students WHERE email = ?",(email,))
@@ -78,11 +78,11 @@ def register():
                 
         if exsisting_user:
             conn.close() # close connection to database
-            flash("Email already in use")
+            return apology("Email already in use")
         
         #hashes user password for security reasons
         hash_password = generate_password_hash(password, method='pbkdf2:sha256')
-        print(hash_password)
+        
         
         #If there is no error in their registration, insert data into users table
         cursor.execute("INSERT INTO students (name,email,password, Role) VALUES (?,?,?,?)", (name, email, hash_password,role))
@@ -109,15 +109,13 @@ def login():
         #checks if user exsists and is approved by the admin to join
         cursor.execute("SELECT * FROM students WHERE email = ? AND status = ?", (email,"approved"))
         user = cursor.fetchone()
-        print(user)
 
         #if user does not exsist or their entered password is not correct return apology
         if  user is not None:
-            print('a')
+            
             if not check_password_hash(user["password"],password):
                 return apology("Invaid password")
         else:
-            print('b')
             return apology("No account to this email")
         
         #set session data to the current users' data once they're logged in
@@ -153,7 +151,6 @@ def view_jobs():
     interested_jobs_cursor = cursor2.execute("SELECT * FROM intrested_jobs WHERE user_id = ?", (session["user_id"], ))
     interested_jobs = []
     for interested_job in interested_jobs_cursor:
-        print(interested_job)
         interested_jobs.append(interested_job["job_id"])
 
     #select all the jobs postings that have been approved by the admin

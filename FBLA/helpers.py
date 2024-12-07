@@ -18,8 +18,8 @@ def login_required(f):
 
     return decorated_function
 
-def apology(x):
-    return x
+def apology(message):
+    return render_template("apology.html", message = message)
 
 def test(x,y):
     z = generate_password_hash(x, method='pbkdf2:sha256')
