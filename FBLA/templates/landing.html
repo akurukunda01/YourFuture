@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        <title>YourFuture: {% block title %}{% endblock %}</title>
+
+    </head>
+    <body>
+      <div class = "landing">
+        <img class = "landing-img" src = "../static/intro.png">
+          <nav class="navbar navbar-expand-lg navbar-light bg-transparent text-dark">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                  <img class = "lbrand" src = "../static/logo.png" alt = "YourFuture">
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-auto">
+                    <li class="nav-item ms-5">
+                      <a class="nav-link fs-3" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item ms-5">
+                      <a class="nav-link fs-3" href="/register">Register</a>
+                    </li>
+                    
+                  </ul>
+                
+                </div>
+              </div>
+            </nav>
+            <div class="container-fluid p-0">
+              <div class="card-intro">
+                <div class="card-body">
+                  <div class = "student">
+                    <h2>For Students</h2>
+                    <h3>Empowering Your Career Journey</h3>
+                    <p>YourFuture is a dynamic platform designed to connect students with potential employers, offering an intuitive way to find job opportunities and internships. As a student, you can browse job listings, apply for roles that match your skills and interests, and track your applications with ease. The platform also lets you pin your favorite job opportunities for future reference, ensuring you never miss out on a chance to launch your career. Build your professional profile, get discovered by employers, and take the next step in your career with YourFuture.</p>
+                    
+                    <ul>
+                      <li><strong>Browse and Apply:</strong> Access a wide variety of job opportunities tailored to your skills and preferences.</li>
+                      <li><strong>Job Pinning:</strong> Save your favorite listings for easy access later.</li>
+                      <li><strong>Personalized Dashboard:</strong> Manage your applications, track progress, and update your profile to attract more employers.</li>
+                    </ul>
+                  <div>
+                
+                  <div class = "d-flex justify-content-end">
+                    <div class = "employer ms-1">
+                      <h2>For Employers</h2>
+                      <h3>Discover Your Next Talent</h3>
+                      <p>YourFuture is a cutting-edge platform that simplifies the recruitment process for employers seeking to hire top student talent. With access to a broad network of students across various disciplines, employers can post job opportunities, internships, and part-time roles to attract qualified candidates. The platform enables employers to efficiently review applications, filter candidates based on skills and experience, and manage their hiring process all in one place.</p>
+                      
+                      <ul>
+                        <li><strong>Post Job Listings:</strong> Easily post job openings and internships to reach a wide pool of talented students.</li>
+                        <li><strong>Candidate Search:</strong> Browse student profiles, filter by skills, qualifications, and more to find the right fit.</li>
+                        <li><strong>Application Management:</strong> Review applications, schedule interviews, and keep track of candidate progress.</li>
+                        <li><strong>Promote Your Brand:</strong> Showcase your company's values and culture to attract top-tier student candidates.</li>
+                      </ul>
+                    <div>
+                  </div>
+                
+                  <div class="admin">
+                    <h2>For Admins</h2>
+                    <h3>Simplifying Platform Management</h3>
+                    <p>As an admin, YourFuture provides powerful tools to oversee and manage the entire platform seamlessly. From moderating content to managing user accounts, admins ensure the platform runs smoothly and that both students and employers have a positive experience. You have full control over user access, job postings, and content guidelines, while also having oversight of student applications and platform growth to ensure the platform continues to thrive and deliver value to its users.</p>
+                    
+                    <ul>
+                      <li><strong>User Management:</strong> Approve, suspend, or delete user accounts (students and employers) as needed.</li>
+                      <li><strong>Content Moderation:</strong> Ensure job listings and profiles meet platform guidelines by reviewing and approving content.</li>
+                      <li><strong>Oversight of Student Applications:</strong> Monitor and review student applications to ensure appropriate placement and quality control.</li>
+                      <li><strong>Platform Growth Tracking:</strong> Keep track of the platform's growth, including student and employer engagement, to assess overall progress and make improvements.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </body>

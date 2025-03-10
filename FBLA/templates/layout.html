@@ -15,8 +15,8 @@
 
     </head>
     <body>
-        {% if session.get("user_id") %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      {%if session.get("user_id")%}
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
             <div class="container-fluid">
               <a class="navbar-brand" href="/">
                 <img class = "brand" src = "../static/logo.png" alt = "YourFuture">
@@ -44,12 +44,11 @@
               </div>
             </div>
           </nav>
-        {% elif not (request.path == "/login" or request.path == "/register") %}
-          <h2>Please Login to access this page</h2>
-          <a href = "/login">Go to Login Page</a>
+      {%endif%}
         
         
-        {% endif %}
+        
+        
         <main>
             {% block main %}{% endblock %}
         </main>
