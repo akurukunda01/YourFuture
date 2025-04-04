@@ -18,10 +18,12 @@ def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-            
+        print(email)
         #checks if user exsists and is approved by the admin to join
         cursor.execute("SELECT * FROM students WHERE email = ? AND status = ?", (email,"approved"))
+        print(cursor)
         user = cursor.fetchone()
+        print(user)
 
         #if user does not exsist or their entered password is not correct return apology
         if  user is not None:

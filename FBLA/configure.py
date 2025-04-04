@@ -9,4 +9,4 @@ class Config:
     MAX_CONTENT_LENGTH = 1024 * 1024  # 1 MB max upload
     UPLOAD_EXTENSIONS = [".jpg", ".png"]
     UPLOAD_PATH = 'uploads/'
-    DATABASE = "./SQL/student.db"
+    DATABASE = './SQL/student.db'

@@ -1,0 +1,84 @@
+{% extends "employer.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block main %}
+<style>
+    
+    
+    body {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    
+    .custom-welcome {
+        color: black;
+        padding: 3rem 0;
+        
+        border-radius: 0 0 20px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1.5rem;
+        border-radius: 0px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+    
+    .post-card {
+        background-color: rgba(139, 110, 75, 0.75);
+        color: white;
+    }
+    
+    
+    .post {
+        padding: 1.5rem;
+    }
+    
+    .post p {
+        color: white;
+        margin-bottom: 0.5rem;
+    
+    }
+    
+    .post h4 {
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+    
+</style>
+<div class="custom-welcome">
+    <div class="container">
+        <h1 class = "fw-bold">See All Posts</h1>
+    </div>
+</div>
+<div class="container-fluid px-0 mb-2">
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="justfiy-content-center">
+                {% for post in posts %}
+                <div class="card post-card ">
+                    <div class="post">
+                        <p class="text-light">Posted by: {{ post.added_by }}</p>
+                        <p class = "fs-4 text-white">{{ post.content }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    
+    
+   
+
+{% endblock %}

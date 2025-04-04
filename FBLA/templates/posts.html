@@ -1,0 +1,188 @@
+{% extends "admin.html" %}
+{% block title %}
+post
+{% endblock %}
+{% block main %}
+<style>
+    /* Add these styles to your existing CSS */
+    
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 5px;
+        background-color: rgba(139, 110, 75, 0.75);
+        color: white;
+        border-radius: 0;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+        color: white;
+        padding: 15px;
+        border-bottom: none;
+    }
+    
+    .card-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    
+    .post {
+        padding: 20px;
+        color: white;
+      }
+      
+      .post p {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    
+    .btn-primary {
+        background-color: #333 !important;
+        border-color: #333 !important;
+        color: white;
+       
+    }
+    
+    .btn-primary:hover {
+        background-color: #555 !important;
+        border-color: #555 !important;
+    }
+    
+    .btn-secondary {
+        background-color: #666 !important;
+        border-color: #666 !important;
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 1050;
+    }
+    
+    .modal-header {
+        border-bottom: 1px solid #eee;
+        background-color: #f5f5f5;
+        padding: 15px 20px;
+    }
+    
+    .modal-title {
+        color: #000;
+        font-weight: 600;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        border-top: 1px solid #eee;
+        padding: 15px 20px;
+    }
+    
+    .form-label {
+        font-weight: 500;
+        color: #000;
+        margin-bottom: 8px;
+    }
+    
+    .form-control {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #000;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-control-plaintext {
+        padding: 12px 0;
+        color: #333;
+        font-weight: 500;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .search-container form {
+            flex-direction: column;
+        }
+        
+    }
+</style>
+{% if posts %}
+<div class="custom-welcome">
+    <h2>Here are your posts:</h2>
+</div>
+{% else %}
+<div >
+    <h2 class = 'custom-welcome' >You do not have any posts currently</h2>
+</div>
+{% endif %}
+
+    
+        
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary w-75" data-bs-toggle="modal" data-bs-target="#addPost">
+                Add Post
+            </button>
+            <div class="col-md-6">
+                {% for post in posts %}
+                <div class="card">
+                    <div class="post">
+                        <p>{{ post.added_by }}
+                        <h4>{{ post.content }}
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+                    
+                
+            </div>
+        </div>
+        
+        
+        <div class="modal fade" id="addPost" tabindex="-1" role="dialog"aria-labelledby="addPost" >
+            <div class="modal-dialog" role = "document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPostModalLabel">Add Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action= "/post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Make post</label>
+                                <textarea class="form-control" id="content" name="content" required rows="3" ></textarea>
+                            </div>
+                            
+
+    
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Post</button>
+                            </div>
+                        </form>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    
+{% endblock %}

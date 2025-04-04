@@ -16,7 +16,7 @@
     </head>
     <body>
       {%if session.get("user_id")%}
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
             <div class="container-fluid">
               <a class="navbar-brand" href="/">
                 <img class = "brand" src = "../static/logo.png" alt = "YourFuture">
@@ -28,23 +28,48 @@
           
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                  <li class="nav-item">
+                  <li class="nav-item mx-3">
                     <a class="nav-link" href="/viewjobs">View Jobs</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item mx-3">
                     <a class="nav-link" href="/pinnedjobs">My Jobs</a>
+                  </li>
+                  <li class="nav-item mx-3">
+                    <a class="nav-link" href="/viewposts">See Posts</a>
                   </li>
                   
                 </ul>
                 <ul class = "navbar-nav ms-auto">
+                  </li>
+                      <form class="d-flex " method="GET" action="/searchHome">
+                        <!-- Dark background input -->
+                        <input class="form-control bg-dark text-white rounded-0 search-input" type="search" style = "::placeholder color:white;" placeholder="Search people" aria-label="Search" name="query">
+                        
+                        
+                        <button class="btn search-icon ml-1" type="submit">
+                          <img src = "../static/download.png" style = "width:25%; height:auto;"> 
+                        </button>
+                      </form>
+                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
+                  
                 </ul>
+               
               </div>
             </div>
           </nav>
       {%endif%}
+      <style>
+        /* Custom CSS for placeholder text color */
+        .search-input::placeholder {
+            color: white;  /* White color for placeholder text */
+        }
+    </style>
         
         
         

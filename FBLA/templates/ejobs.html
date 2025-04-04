@@ -5,6 +5,66 @@
 {% endblock %}
 
 {% block main %}
+<style>
+  .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    background-color: rgba(139, 110, 75, 0.75);
+    color: white;
+    border-radius: 0;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    color: white;
+    padding: 15px;
+    border-bottom: none;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+.job {
+  padding: 20px;
+  color: white;
+}
+
+.job p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  background-color: #000;
+  border-color: #000;
+  color: white;
+  
+}
+
+.btn-primary:hover {
+  background-color: #555 !important;
+  border-color: #555 !important;
+}
+
+.btn-secondary {
+  background-color: #666 !important;
+  border-color: #666 !important;
+}
+
+</style>
+<div class="custom-welcome">
+  <h2>These are your posted jobs</h2>
+</div>
 {% for job in portfolio %}
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -19,7 +79,7 @@
             <p>Pay: {{ job.pay }}</p>
           </div>
           <form method="POST">
-            <button type="submit" class="btn btn-danger" id="remove" name="remove" value="decline_{{ job.id }}">Remove</button>
+            <button type="submit" class="btn btn-primary" id="remove" name="remove" value="decline_{{ job.id }}">Remove</button>
           </form>
         </div>
       </div>
@@ -27,8 +87,9 @@
   </div>
 {% endfor %}
 
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobModal">Add Job</button>
+<div class = "row justify-content-center">
+  <button type="button" class="btn btn-secondary m-5 w-50 justify-content-center" data-bs-toggle="modal" data-bs-target="#addJobModal">Add Job</button>
+</div>
 
 <div class="modal fade" id="addJobModal" tabindex="-1" aria-labelledby="addJobModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -57,7 +118,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" name="add">Save Job</button>
+            <button type="submit" class="btn btn-primary mx-2 my-1" name="add">Save Job</button>
           </div>
         </form>
         

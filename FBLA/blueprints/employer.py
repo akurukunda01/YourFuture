@@ -16,7 +16,7 @@ def myJobs():
     jobs = cursor.fetchall()
     portfolio = []
     for job in jobs:
-        portfolio.append({"company":job["company"], "id":job["id"],"company_role":job["company_role"],"pay":job["pay"], "Description": job["Description"]})
+        portfolio.insert(0,{"company":job["company"], "id":job["id"],"company_role":job["company_role"],"pay":job["pay"], "Description": job["Description"]})
 
     if request.method == "POST":
         # if they press remove button delete the posting
@@ -66,6 +66,57 @@ def viewApplications():
         for job in jobs:
             check = job["job_id"] in postedJobs
             if check:
-                portfolio.append({"company":job["company"], "role": job["role"], "id": job["id"], "reason": job["reason"], "resume":job["resume"], "filepath": job["filepath"],  "name": job["name"], "email": job["email"]})
+                portfolio.insert(0,{"company":job["company"], "role": job["role"], "id": job["id"], "reason": job["reason"], "resume":job["resume"], "filepath": job["filepath"],  "name": job["name"], "email": job["email"]})
     conn.close()
     return render_template("eapplications.html", portfolio = portfolio)
+
+@login_required
+@employer_bp.route('/searchMyPostings', methods = ['GET'])
+def Search():  
+    item = request.args.get('query')
+    if item:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM intrested_jobs WHERE company LIKE ?",('%'+item+'%',))
+        jobs = cursor.fetchall()
+        portfolio = []
+        for job in jobs:
+            cursor.execute("SELECT added_by FROM jobs where id = ?",(job["job_id"],))
+            adder = cursor.fetchone()
+            if adder[0] == session["user_id"]:
+                portfolio.insert(0,{"company":job["company"], "name":job["name"], "email":job["email"], "reason":job["reason"], "id":job["job_id"], "resume":job["resume"], "role":job["role"]})
+        conn.close()
+        if portfolio:
+            return render_template("eapplications.html",portfolio = portfolio)
+    conn.close()
+    return redirect('/applications')
+
+@login_required
+@employer_bp.route("/EsearchHome")
+def searchHome():
+    item = request.args.get('query')
+    if item:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM profile WHERE name LIKE ?",('%'+item+'%',))
+        profile = cursor.fetchone()
+        if profile:  
+            conn.close()
+            return render_template("EsearchResults.html",profile=profile)
+    conn.close()
+    return redirect('/')
+@login_required
+@employer_bp.route('/eViewPosts', methods = ["GET"])
+def seePosts():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM posts")
+    get_post = cursor.fetchall()
+    posts = []
+    for get in get_post:
+        cursor.execute("SELECT name FROM students WHERE id = ?", (get["added_by"],))
+        adder = cursor.fetchone()
+        for add in adder:
+            posts.insert(0,{"added_by":add, "content":get["content"],"id":get["id"]})
+    conn.close()
+    return render_template("ePosts.html", posts = posts)

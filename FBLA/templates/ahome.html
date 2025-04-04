@@ -5,57 +5,225 @@
 {% endblock %}
 
 {% block main %}
-<div class = "custom-welcome">
-    <h1>Welcome to YourFuture {{ name }}!</h1>
-<div>
-<div class = "logo">
-    <img src = "../static/logo.png" alt = "YourFuture">
-</div>
-<div class = "future">
-    <h3> 
-        Welcome to YourFuture! As an administrator, you play a crucial role in ensuring our platform runs smoothly
-         and effectively connects employers with talented students. YourFuture offers you the tools to manage job postings, review applicant submissions, and facilitate seamless communication between employers and students. With your oversight, we can maintain a user-friendly experience that helps shape the professional journeys of students while meeting the needs of employers.
-         Together, we can foster a thriving community where opportunity and growth go hand in hand. Thank you for helping us build a brighter future!
-    </h3>
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Connection<h2>
-    </div>
-    <div class = "card-body">
-        We connect students to employers and more importantly to their future.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\handshake-removebg-preview.png" alt = "connection">
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Opportunity<h2>
-    </div>
-    <div class = "card-body">
-        We give student the opportunites they need to grow and evolve.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\growth-removebg-preview.png" alt = "oppurtunity">
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Learning<h2>
-    </div>
-    <div class = "card-body">
-        We provide invaluable knowledge to students about what their future can be, teaching them life skills to conquer their goals.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\book-removebg-preview.png" alt = "learning">
-</div>
-
-
+<style>
+    
+    .custom-welcome {
+        color: black;
+        padding: 3rem 0;
         
+        border-radius: 0 0 20px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .custom-welcome h1 {
+        font-weight: 700;
+        font-size: 2.5rem;
+        
+    }
+    
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1.5rem;
+        border-radius: 0px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+    
+    .post-card {
+        background-color: rgba(139, 110, 75, 0.75);
+        color: white;
+    }
+    
+    .job-card {
+        background-color: black;
+        color: white;
+    }
+    
+    .post {
+        padding: 1.5rem;
+    }
+    
+    .post p {
+        color: white;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    
+    .post h4 {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    .section-title {
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--dark-color);
+        border-bottom: 3px solid var(--primary-color);
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+    
+    .credits {
+        position: absolute;
+        padding:5vh;
+        margin-top: 3rem;
+        text-align: center;
+        width:100%;
+        height:auto;
+        background-color: whitesmoke;
+    }
+    
+    .credits a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+    
+    .job-info {
+        margin-bottom: 0.5rem;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        /* Adjust the container width and margins */
+        .custom-welcome h1 {
+            font-size: 1.8rem; /* Adjust font size for smaller screens */
+        }
 
-<div class = "credits">
-    <a href="/credits">Credits</a>
-    </a>
+        .post-card, .job-card {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Ensure the credits section behaves properly on small screens */
+        .credits {
+            padding: 2rem 1rem; /* Add some padding for small screens */
+        }
+
+        .credits .d-flex {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Reduce margins in the main content for smaller screens */
+        .container, .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Fix the overflow issue for smaller screens */
+        .container-fluid, .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .post-section{
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+
+        }
+
+        /* Stack the posts and portfolio sections vertically on small screens */
+       
+
+        /* Make sure the footer credits fit on the screen */
+        .credits img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+    }
+    .credits img {
+        max-height: 20%;
+        width: auto;
+        margin: 0 auto;
+    }
+    .post-section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        margin-left: 15px;
+        margin-right: 15px;
+        
+       
+    }
+</style>
+<div class="custom-welcome">
+    <div class="container">
+        <h1>Welcome to YourFuture {{ name }}!</h1>
+    </div>
+</div>
+<div class="container-fluid px-0 mb-2">
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5 col-lg-3  ">
+                {% for user in portfolio %}
+                <div class="card job-card">
+                    <div class="post">
+                        <h4 class="job-info">{{ user.name }}</h4>
+                        <p class="job-info"><strong>Role:</strong> {{ user.role }}</p>
+                        <p class="job-info"><strong>Email:</strong> {{ user.email }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <a class = "p-5 justfiy-content-center " href = '/reviewprofiles'> View Pending Users</a>
+                
+            </div>
+            <div class="col-12 col-md-8 col-lg-5  post-section ">
+                {% for post in posts %}
+                <div class="card post-card ">
+                    <div class="post">
+                        <p class="text-light">Posted by: {{ post.added_by }}</p>
+                        <h4>{{ post.content }}</h4>
+                    </div>
+                </div>
+                {% endfor %}
+                <a class = "p-5 justfiy-content-center" href = '/post'> See All Posts</a>
+            </div>
+    
+            <div class = "col-12 col-md-8 col-lg-3 ">
+                {% for job in jobs %}
+                <div class="card job-card">
+                    <div class="post">
+                        <h4 class="job-info">{{ job.company }}</h4>
+                        <p class="job-info"><strong>Role:</strong> {{ job.role }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <a class = "p-5 justfiy-content-center" href = "/reviewJobs"> See Pending Jobs</a>
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <div class="credits d-flex">
+        <div class="d-flex col-lg-4">
+            <img src="../static/logo.png" alt="YourFuture" style="max-height: 20%; width: auto;">
+        </div>
+    
+        
+        <div class="d-flex justify-content-start">
+            <div class="d-flex fs-6">
+                <a href="/credits" class="text-black me-5">Credits</a>
+                <div class="me-5">YourFuture 2025</div>
+                <div class="me-5">YourFuture@socialmedia.com</div>
+                <div class="me-5">YourFuture@example.com</div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</div>
 {% endblock %}

@@ -5,9 +5,67 @@
 {% endblock %}
 
 {% block main %}
-<div class = "app-welcome">
+<style>
+  .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    background-color: rgba(139, 110, 75, 0.75);
+    color: white;
+    border-radius: 0;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    color: white;
+    padding: 15px;
+    border-bottom: none;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.job {
+    padding: 20px;
+    color: white;
+}
+
+.job p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    background-color: #000;
+    border-color: #000;
+    color: white;
+    
+}
+
+.btn-primary:hover {
+    background-color: #555 !important;
+    border-color: #555 !important;
+}
+
+.btn-secondary {
+    background-color: #666 !important;
+    border-color: #666 !important;
+}
+</style>
+<div class = "custom-welcome">
   <h2>These are applications from students:<h2>
   </div>
+{% if portfolio %}
 {% for job in portfolio %}
 <div class="row justify-content-center">
   <div class="col-md-6">
@@ -17,19 +75,26 @@
       </div>
 
       <form action="/reviewapplicants" method="post">
-        <div class="card-body">
-          <p>Name: {{ job.name }}</p>
-          <p>Email: {{ job.email }}</p>
-          <p>Company: {{ job.company }}</p>
-          <p>Role: {{ job.role }}</p>
-          <p>Application: {{ job.reason }}</p>
+        <div class="job">
+          <p><strong>Name:</strong> {{ job.name }}</p>
+          <p><strong>Email:</strong> {{ job.email }}</p>
+          <p><strong>Company:</strong> {{ job.company }}</p>
+          <p><strong>Role:</strong> {{ job.role }}</p>
+          <p><strong>Application:</strong> {{ job.reason }}</p>
 
           
           <div class="d-grid gap-2 d-md-block">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addJobModal{{ job.id }}">
               View Resume
             </button>
+          
+            <button type="submit" name="action" class="btn btn-secondary" value="remove_{{ job.id }}">Remove</button>
           </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
           
           <div class="modal fade" id="addJobModal{{ job.id }}" tabindex="-1" aria-labelledby="addJobModalLabel{{ job.id }}" aria-hidden="true">
@@ -51,14 +116,13 @@
           </div>
 
           
-          <button type="submit" name="action" class="btn btn-danger" value="remove_{{ job.id }}">Remove</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 {% endfor %}
+{% else %}
+<div class = "d-flex justify-content-center align-items-center"style="height: 25vh;">
+    <h2> There are no current applications to be reviewed, check back another time </h2>
+</div>
+{% endif %}
     
 
 

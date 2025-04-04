@@ -15,13 +15,14 @@ def reviewJobs():
     cursor = conn.cursor()
 
     #select all jobs 
-    jobs = cursor.execute("SELECT * FROM jobs")
+    cursor.execute("SELECT * FROM jobs WHERE status IS NULL")
+    jobs = cursor.fetchall()
     portfolio=[]
 
     for job in jobs:
-        #if a job has not already been approved send them to the admin to review
-        if job["status"]!="approved":
-            portfolio.append({"company":job["company"], "id":job["id"],"company_role":job["company_role"],"pay":job["pay"], "Description": job["Description"]})
+        cursor.execute("SELECT name FROM students WHERE id = ?",(job["added_by"],))
+        add = cursor.fetchone()
+        portfolio.append({"company":job["company"], "id":job["id"],"company_role":job["company_role"],"pay":job["pay"], "Description": job["Description"],"adder":add[0] })
     
 
     if request.method == "POST":
@@ -37,7 +38,7 @@ def reviewJobs():
                 #if it's not approved, delete it from the table
                 cursor.execute("DELETE FROM jobs WHERE id=?",(job_id,))
             conn.commit()
-            
+        conn.close()    
         return redirect("/reviewJobs")
     
 
@@ -100,9 +101,34 @@ def application():
         id = int(id)
         cursor.execute("DELETE FROM intrested_jobs WHERE id = ?", (id,))
         conn.commit()
+        conn.close()
         return redirect("/reviewapplicants")
     conn.close()
     return render_template("aapplications.html", portfolio = portfolio)
+
+@login_required
+@admin_bp.route("/post",methods = ["GET","POST"])
+def post():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM posts")
+    post_get = cursor.fetchall()
+    posts = []
+    for get in post_get:
+        cursor.execute("SELECT name FROM students WHERE id = ?", (get["added_by"],))
+        adder = cursor.fetchone()
+        for add in adder:
+            posts.insert(0,{"added_by":add, "content":get["content"],"id":get["id"]})
+         
+    if request.method == "POST":
+        added_by = session['user_id']
+        content = request.form.get('content')
+        cursor.execute("INSERT INTO posts (added_by,content) VALUES (?,?) ", (added_by,content))
+        conn.commit()
+        conn.close()
+        return redirect("/post")
+    conn.close()
+    return render_template("posts.html",posts = posts)
 
     
     

@@ -5,58 +5,184 @@
 {% endblock %}
 
 {% block main %}
+<style>
+    body {
+        background-color: rgba(255, 255, 255, 0);
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
 
-<div class = "custom-welcome">
-    <h1>Welcome to YourFuture {{ name }}!</h1>
-<div>
-<div class = "logo">
-    <img src = "../static/logo.png" alt = "YourFuture">
-</div>
-<div class = "future">
-    <h3> Welcome to YourFuture! Your bridge to exciting career opportunities starts here. Whether you're a student looking for your first internship, part-time work, or full-time job, YourFuture connects you with employers who are eager to hire students like you. Build your professional network, discover 
-        job openings tailored to your skills and interests, and take the next step in your career journey with confidence.
-        Let's help you turn your potential into success!
-    </h3>
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Connection<h2>
-    </div>
-    <div class = "card-body">
-        We connect students to employers and more importantly to their future.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\handshake-removebg-preview.png" alt = "connection">
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Opportunity<h2>
-    </div>
-    <div class = "card-body">
-        We give student the opportunites they need to grow and evolve.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\growth-removebg-preview.png" alt = "oppurtunity">
-</div>
-<div class = "card card-transparent">
-    <div class = "card-header">
-        <h2>Learning<h2>
-    </div>
-    <div class = "card-body">
-        We provide invaluable knowledge to students about what their future can be, teaching them life skills to conquer their goals.
-    </div>
-</div>
-<div class = "images">
-    <img src = "..\static\book-removebg-preview.png" alt = "learning">
-</div>
+    
+
+    .custom-welcome h1 {
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
 
 
-        
+    .job-card {
+        background-color: black;
+        color: white;
+    }
 
-<div class = "credits">
-    <a href="/credits">Credits</a>
-    </a>
+    .post {
+        padding: 1.5rem;
+    }
+
+    .post p {
+        color: white;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    .post h4 {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .section-title {
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--dark-color);
+        border-bottom: 3px solid var(--primary-color);
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+
+    .credits {
+        padding: 2rem;
+        text-align: center;
+        background-color: whitesmoke;
+        margin-top: 3rem;
+    }
+
+    .credits a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .job-info {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Make the image in the footer responsive */
+    .credits img {
+        max-height: 20%;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    /* Mobile-First Design */
+    @media (max-width: 768px) {
+        .custom-welcome h1 {
+            font-size: 1.8rem; /* Adjust font size for smaller screens */
+        }
+
+        .post-card, .job-card {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Ensure the credits section behaves properly on small screens */
+        .credits {
+            padding: 2rem 1rem; /* Add some padding for small screens */
+        }
+
+        .credits .d-flex {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Reduce margins in the main content for smaller screens */
+        .container, .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Fix the overflow issue for smaller screens */
+        .container-fluid, .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* Stack the posts and portfolio sections vertically on small screens */
+        .col-12 {
+            width: 100%;
+        }
+
+        /* Make sure the footer credits fit on the screen */
+        .credits img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    /* Custom styles for the posts section to balance left and right margins */
+    .post-section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+</style>
+
+<div class="custom-welcome">
+    <div class="container">
+        <h1>Welcome to YourFuture {{ name }}!</h1>
+    </div>
+</div>
+
+<div class="container-fluid px-0 mb-2">
+    <div class="container">
+        <div class="row">
+            <!-- Posts Section (on the left) -->
+            <div class="col-12 col-md-8 col-lg-8 post-section">
+                {% for post in posts %}
+                <div class="card post-card">
+                    <div class="post">
+                        <p class="text-light">Posted by: {{ post.added_by }}</p>
+                        <h4>{{ post.content }}</h4>
+                    </div>
+                </div>
+                {% endfor %}
+                <a class="p-5 justify-content-center" href="/viewposts">See All Posts</a>
+            </div>
+
+            <!-- Portfolio Section (on the right) -->
+            <div class="col-12 col-md-4 col-lg-3 ">
+                {% for job in portfolio %}
+                <div class="card job-card">
+                    <div class="post">
+                        <h4 class="job-info">{{ job.company }}</h4>
+                        <p class="job-info">Role: {{ job.company_role }}</p>
+                        <p class="job-info">Salary: {{ job.pay }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <a class="p-5 justify-content-center" href="/viewjobs">See All Jobs</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="credits d-flex justify-content-between">
+        <div class="d-flex col-md-4 mb-3 mb-md-0">
+            <img src="../static/logo.png" alt="YourFuture">
+        </div>
+
+        <div class="d-flex flex-column flex-md-row justify-content-start">
+            <div class="d-flex fs-6">
+                <a href="/credits" class="text-black me-5">Credits</a>
+                <div class="me-5">YourFuture 2025</div>
+                <div class="me-5">YourFuture@socialmedia.com</div>
+                <div class="me-5">YourFuture@example.com</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 {% endblock %}
