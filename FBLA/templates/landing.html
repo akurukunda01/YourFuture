@@ -12,6 +12,135 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
         <title>YourFuture: {% block title %}{% endblock %}</title>
+        <style>
+    
+            .landing-img {
+                top: 0px;
+                width: 100%;
+                height: auto;
+            }
+    
+            .lbrand {
+                width: 150px; /* or adjust accordingly */
+            }
+    
+            /* Navbar */
+            .navbar-light .navbar-nav .nav-link {
+                font-size: 1.25rem;
+            }
+    
+            /* Login/Register Button Styles */
+            .btn-dark {
+                position: absolute;
+                top: 85%;
+                left: 2%;
+                width: 25%;
+            }
+    
+            .btn-dark.bg-transparent {
+                left: 28%;
+                color: black;
+            }
+    
+            /* About Us Section */
+            .form-container {
+                position: absolute;
+                top: 110%;
+                width: 100%;
+            }
+    
+            /* Footer Section */
+            .bg-dark.text-white {
+                margin-top: 10%;
+            }
+    
+            /* Image section */
+            .image-section {
+                position: relative;
+                width: 100%;
+                height: 15%;
+            }
+    
+            .image-section img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+    
+            /* Section for Students */
+            .container.my-5.py-5 {
+                margin-top: 50px;
+            }
+    
+            /* Section for Employers */
+            .container-fluid.bg-dark.text-white.py-5 {
+                background-color: #333;
+            }
+    
+            /* Cards inside sections */
+            .card-body.p-4 {
+                padding: 20px;
+            }
+    
+            /* Button on employer section */
+            .btn-light {
+                font-weight: 500;
+            }
+    
+            /* Adjustments for responsive design */
+            @media (max-width: 768px) {
+                /* Adjust button positioning on smaller screens */
+                .btn-dark {
+                    width: 100%;
+                    top:30% !important;
+                    left: 0%;
+                }
+    
+                .btn-dark.bg-transparent {
+                    width: 100%;
+                    left: 0%;
+                }
+    
+                .image-section {
+                    height: auto;
+                }
+    
+                .navbar-nav {
+                    text-align: center;
+                }
+                
+                
+                .about{
+                    top:40% !important;
+                }
+                /* Make the navbar smaller */
+                .navbar {
+                    padding: 0.5rem 1rem; /* Reduce the navbar padding */
+                    font-size: 0.9rem; /* Reduce font size */
+                }
+
+                /* Adjust navbar brand */
+                .navbar-brand img {
+                    width: 120px; /* Resize logo to make it smaller */
+                }
+
+                /* Adjust navbar links */
+                .navbar-light .navbar-nav .nav-link {
+                    font-size: 1rem; /* Slightly reduce font size for the nav links */
+                    padding: 0.5rem 1rem; /* Reduce padding around the links */
+                }
+
+                /* Adjust navbar toggler for smaller screen */
+                .navbar-toggler {
+                    padding: 0.25rem 0.5rem; /* Reduce padding of the hamburger menu */
+                }
+
+                /* Optional: Adjust the height of navbar items */
+                .navbar-nav .nav-item {
+                    height: 40px; /* Adjust if you want a more compact navbar */
+                }
+            }
+        </style>
 
     </head>
     <body>
@@ -47,7 +176,7 @@
             <a href = 'register'>
               <button class = "btn btn-dark bg-transparent text-black w-25" style = "position:absolute;top:85%; left:28%;">Register</button>
             </a>
-            <div class="form-container bg-white "style = "position:absolute;top:110%; width:100%;">
+            <div class=" about form-container bg-white "style = "position:absolute;top:110%; width:100%;">
               <section id="about-us" class="container">
                   <h2 class="text-center my-4 fw-bold fs-2">About Us</h2>
                   <p class="lead text-center mb-5">
@@ -262,7 +391,7 @@
                                               </p>
                                           </div>
                                           <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                                              <a href="/register?type=employer" class="btn btn-dark fw-medium px-4 py-2">Create Employer Account</a>
+                                              <a href="/register?type=employer" class="btn btn-dark fw-medium mb-1 px-4 py-2" style="top:75%;">Create Employer Account</a>
                                           </div>
                                       </div>
                                   </div>
