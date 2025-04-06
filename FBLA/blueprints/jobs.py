@@ -91,7 +91,7 @@ def Search():
     if item:
         conn = get_db()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM JOBS WHERE company LIKE ? OR company_role LIKE ?",('%'+item+'%','%'+item+'%'))
+        cursor.execute("SELECT * FROM JOBS WHERE (company LIKE ? OR company_role LIKE ?) AND status = ?",('%'+item+'%','%'+item+'%', "approved"))
         jobs = cursor.fetchall()
         if jobs:
             conn.close()
