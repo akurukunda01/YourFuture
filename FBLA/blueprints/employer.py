@@ -43,7 +43,9 @@ def myJobs():
     conn.close()
     return render_template("ejobs.html", portfolio = portfolio)
 
-
+def addJob():
+    conn,cursor = get_db()
+    company = session["company_name"]
 @login_required
 @employer_bp.route("/applications")
 def viewApplications():

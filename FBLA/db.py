@@ -1,18 +1,23 @@
-
-import sqlite3
+import psycopg2
+import psycopg2.extras
 from flask import g
 from configure import Config
 
 def get_db():
-    # Connect to the database and return the connection
-    if not hasattr(g, 'sqlite_db'):
-        # Add timeout (e.g., 10 seconds) to help prevent the "database is locked" error
-        g.sqlite_db = sqlite3.connect(Config.DATABASE, check_same_thread=False, timeout=10)
-        g.sqlite_db.row_factory = sqlite3.Row
-    return g.sqlite_db
+    if 'db' not in g:
+        g.db = psycopg2.connect(
+            dbname=Config.DB_NAME,
+            user=Config.DB_USER,
+            host=Config.DB_HOST,
+            port=Config.DB_PORT
+        )
+        g.cursor = g.db.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    return g.db, g.cursor
 
 
-def close_db(error):
-    # Close the database connection at the end of the request
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()
+def close_db(e=None):
+    db = g.pop('db', None)
+
+    if db is not None:
+        db.close()
+

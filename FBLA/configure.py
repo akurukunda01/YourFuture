@@ -8,5 +8,11 @@ class Config:
     SEND_FILE_MAX_AGE_DEFAULT = 0
     MAX_CONTENT_LENGTH = 1024 * 1024  # 1 MB max upload
     UPLOAD_EXTENSIONS = [".jpg", ".png"]
-    UPLOAD_PATH = 'uploads/'
-    DATABASE = './SQL/student.db'
+    UPLOAD_PATH = 'uploads'
+
+    # PostgreSQL connection details
+    DB_NAME = 'postgres'
+    DB_USER = 'akurukunda01'
+    DB_HOST = 'localhost'
+    DB_PORT = '5432'
+
